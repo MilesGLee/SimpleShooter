@@ -40,6 +40,8 @@ namespace SimpleShooter
 
                 _actors[i].Update(deltaTime);
 
+                if (i >= _actors.Length)
+                    i--;
                 //incremtns thorgh the actors array
                 for (int j = 0; j < _actors.Length; j++)
                 {
@@ -49,10 +51,7 @@ namespace SimpleShooter
                         //then start on Collision for actor 1 by making actor 2 be collied with.
                         _actors[i].OnCollision(_actors[j]);
                 }
-
-
             }
-
         }
 
         /// <summary>
@@ -113,7 +112,7 @@ namespace SimpleShooter
             int j = 0;
 
             //incremens through the temArray
-            for (int i = 0; i < temArray.Length; i++)
+            for (int i = 0; i < _actors.Length; i++)
             {
                 //sais that if actor is not equal to the actor that is choosen then dont go into but..
                 if (_actors[i] != actor)
