@@ -58,5 +58,16 @@ namespace SimpleShooter
 
             
         }
+
+        public override void OnCollision(Actor actor)
+        {
+            if (actor is Enemy)
+                Engine._currentScene.RemoveActor(actor);
+        }
+
+        public override void Draw()
+        {
+            Raylib.DrawCircleLines((int)Postion.X, (int)Postion.Y, CollisionRadius, Color.YELLOW);
+        }
     }
 }

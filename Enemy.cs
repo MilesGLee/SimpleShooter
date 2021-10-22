@@ -56,5 +56,10 @@ namespace SimpleShooter
             Vector2 directionOfTarget = (_player.Postion - Postion).Normalized;
             return Vector2.DotProduct(directionOfTarget, Forward) > 0;
         }
+
+        public override void Draw()
+        {
+            Raylib.DrawCircleLines((int)Postion.X, (int)Postion.Y, CollisionRadius, Color.RED);
+        }
     }
 }

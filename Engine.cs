@@ -70,8 +70,8 @@ namespace SimpleShooter
             _currentScene = new Scene();
 
 
-            Player player = new Player('>', 10, 1, 150, Color.RAYWHITE, 1, "Player");
-            Enemy enemy = new Enemy('P', 110, 0, 100, player, Color.GOLD, 1, "Enemy");
+            Player player = new Player(' ', 10, 1, 150, Color.RAYWHITE, 25, "Player");
+            Enemy enemy = new Enemy('E', 110, 0, 100, player, Color.GOLD, 25, "Enemy");
 
 
 

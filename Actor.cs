@@ -27,6 +27,12 @@ namespace SimpleShooter
         private float _colRad = 1;
 
 
+        public float CollisionRadius
+        {
+            get { return _colRad; }
+            set { _colRad = value; }
+        }
+
         public bool Started
         {
             get { return _started; }
@@ -108,6 +114,7 @@ namespace SimpleShooter
         public virtual void Draw()
         {
             Raylib.DrawText(Icon.Symbol.ToString(), (int)Postion.X, (int)Postion.Y, 50, Icon.color);
+            
         }
 
         public void End()
