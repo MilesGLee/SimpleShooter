@@ -72,11 +72,11 @@ namespace SimpleShooter
             _currentScene = new Scene();
 
 
-            Player player = new Player(' ', 400, 225, 150, Color.RAYWHITE, 25, "Player");
-            CircleCollider playerCollider = new CircleCollider(50, player);
+            Player player = new Player(' ', 400, 225, 150, Color.RAYWHITE, "Player");
+            CircleCollider playerCollider = new CircleCollider(25, player);
             player.Collider = playerCollider;
-            Enemy enemy = new Enemy('E', 110, 0, 100, player, Color.GOLD, 25, "Enemy");
-            CircleCollider enemyCollider = new CircleCollider(50, enemy);
+            Enemy enemy = new Enemy('E', 110, 0, 100, player, Color.GOLD, "Enemy");
+            CircleCollider enemyCollider = new CircleCollider(25, enemy);
             enemy.Collider = enemyCollider;
 
 
@@ -193,7 +193,7 @@ namespace SimpleShooter
             {
                 if (Scene._actors[i] is Player) //Sifts through all the actors to get the player, to make them the new enemies target.
                 {
-                    Enemy enemy = new Enemy('E', (float)x, (float)y, 100, (Player)Scene._actors[i], Color.GOLD, 25, "Enemy");
+                    Enemy enemy = new Enemy('E', (float)x, (float)y, 100, (Player)Scene._actors[i], Color.GOLD, "Enemy");
                     CircleCollider enemyCollider = new CircleCollider(25, enemy);
                     enemy.Collider = enemyCollider;
                     _currentScene.AddActor(enemy);
