@@ -26,8 +26,8 @@ namespace SimpleShooter
             set { _velocity = value; }
         }
 
-        public Player(char icon, float x, float y, float speed, Color color, float radi, string name = "Player")
-            : base(icon, x, y, speed, color, radi, name)
+        public Player(char icon, float x, float y, float speed, Color color, string name = "Player")
+            : base(icon, x, y, speed, color, name)
         {
             _speed = speed;
 
@@ -51,7 +51,7 @@ namespace SimpleShooter
             //This if statement repeats multiple times with small differences, this gives the player the ability to shoot in 8 directions.
             if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_UP) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN)) 
             {
-                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 1, Y = 0}, 10, "Bullet"); //Spawns the bullet with the proper direction to move in.
+                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 1, Y = 0}, "Bullet"); //Spawns the bullet with the proper direction to move in.
                 CircleCollider bulletCollider = new CircleCollider(10, pellet);
                 pellet.Collider = bulletCollider;
                 Engine._currentScene.AddActor(pellet);
@@ -59,7 +59,7 @@ namespace SimpleShooter
             }
             if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_UP) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN))
             {
-                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = -1, Y = 0 }, 10, "Bullet");
+                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = -1, Y = 0 }, "Bullet");
                 CircleCollider bulletCollider = new CircleCollider(10, pellet);
                 pellet.Collider = bulletCollider;
                 Engine._currentScene.AddActor(pellet);
@@ -67,7 +67,7 @@ namespace SimpleShooter
             }
             if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_UP) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN))
             {
-                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 0, Y = -1 }, 10, "Bullet");
+                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 0, Y = -1 }, "Bullet");
                 CircleCollider bulletCollider = new CircleCollider(10, pellet);
                 pellet.Collider = bulletCollider;
                 Engine._currentScene.AddActor(pellet);
@@ -75,7 +75,7 @@ namespace SimpleShooter
             }
             if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_DOWN) && Raylib.IsKeyUp(KeyboardKey.KEY_UP) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT))
             {
-                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 0, Y = 1 }, 10, "Bullet");
+                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 0, Y = 1 }, "Bullet");
                 CircleCollider bulletCollider = new CircleCollider(10, pellet);
                 pellet.Collider = bulletCollider;
                 Engine._currentScene.AddActor(pellet);
@@ -83,7 +83,7 @@ namespace SimpleShooter
             }
             if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_UP) && Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN))
             {
-                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 1, Y = -1 }, 10, "Bullet");
+                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 1, Y = -1 }, "Bullet");
                 CircleCollider bulletCollider = new CircleCollider(10, pellet);
                 pellet.Collider = bulletCollider;
                 Engine._currentScene.AddActor(pellet);
@@ -91,7 +91,7 @@ namespace SimpleShooter
             }
             if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_UP) && Raylib.IsKeyDown(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN))
             {
-                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = -1, Y = -1 }, 10, "Bullet");
+                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = -1, Y = -1 }, "Bullet");
                 CircleCollider bulletCollider = new CircleCollider(10, pellet);
                 pellet.Collider = bulletCollider;
                 Engine._currentScene.AddActor(pellet);
@@ -99,7 +99,7 @@ namespace SimpleShooter
             }
             if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_DOWN) && Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_UP))
             {
-                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 1, Y = 1 }, 10, "Bullet");
+                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = 1, Y = 1 }, "Bullet");
                 CircleCollider bulletCollider = new CircleCollider(10, pellet);
                 pellet.Collider = bulletCollider;
                 Engine._currentScene.AddActor(pellet);
@@ -107,7 +107,7 @@ namespace SimpleShooter
             }
             if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_DOWN) && Raylib.IsKeyDown(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_UP))
             {
-                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = -1, Y = 1 }, 10, "Bullet");
+                Bullet pellet = new Bullet(' ', Postion.X, Postion.Y, 500, Color.RED, new Vector2 { X = -1, Y = 1 }, "Bullet");
                 CircleCollider bulletCollider = new CircleCollider(10, pellet);
                 pellet.Collider = bulletCollider;
                 Engine._currentScene.AddActor(pellet);
@@ -129,7 +129,8 @@ namespace SimpleShooter
 
         public override void Draw() //I like the circles for all my actors, they look nice.
         {
-            Raylib.DrawCircleLines((int)Postion.X, (int)Postion.Y, CollisionRadius, Color.GREEN);
+            CircleCollider myCol = (CircleCollider)Collider;
+            Raylib.DrawCircleLines((int)Postion.X, (int)Postion.Y, myCol.CollisionRadius, Color.GREEN);
         }
     }
 }

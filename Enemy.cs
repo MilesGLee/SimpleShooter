@@ -26,8 +26,8 @@ namespace SimpleShooter
         }
 
 
-        public Enemy(char icon, float x, float y, float speed, Player player, Color color, float radi, string name = "Enemy")
-            : base(icon, x, y, speed, color, radi,name)
+        public Enemy(char icon, float x, float y, float speed, Player player, Color color, string name = "Enemy")
+            : base(icon, x, y, speed, color,name)
         {
             //i need to the player = palyer I need to get the this.
             _speed = speed;
@@ -59,7 +59,8 @@ namespace SimpleShooter
 
         public override void Draw()
         {
-            Raylib.DrawCircleLines((int)Postion.X, (int)Postion.Y, CollisionRadius, Color.RED);
+            CircleCollider myCol = (CircleCollider)Collider;
+            Raylib.DrawCircleLines((int)Postion.X, (int)Postion.Y, myCol.CollisionRadius, Color.RED);
         }
 
         public override void OnCollision(Actor actor)

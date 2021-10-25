@@ -24,15 +24,7 @@ namespace SimpleShooter
         private bool _started;
         private float _speed;
         private Vector2 _forward = new Vector2(1, 0);
-        private float _colRad = 1;
         private Collider _collider;
-
-
-        public float CollisionRadius
-        {
-            get { return _colRad; }
-            set { _colRad = value; }
-        }
 
         public bool Started
         {
@@ -85,8 +77,8 @@ namespace SimpleShooter
         /// </summary>
         /// <param name="x">is the replace the Vector2</param>
         /// <param name="y">is the replacement for the veoctor2</param>
-        public Actor(char icon, float x, float y, float speed, Color color, float rad, string name = "Actor") :
-            this(icon, new Vector2 { X = x, Y = y }, color, speed, rad, name)
+        public Actor(char icon, float x, float y, float speed, Color color, string name = "Actor") :
+            this(icon, new Vector2 { X = x, Y = y }, color, speed, name)
         { }
 
 
@@ -97,13 +89,12 @@ namespace SimpleShooter
         /// <param name="position">is the loctation that the icon is in</param>
         /// <param name="name">current Actor name</param>
         /// <param name="color">The color that the neame or icon will be</param>
-        public Actor(char icon, Vector2 position, Color color, float speed, float rad, string name = "Actor")
+        public Actor(char icon, Vector2 position, Color color, float speed, string name = "Actor")
         {
             //updatede the Icon with the struct and made it take a symbol and a color
             _icon = new Icon { Symbol = icon, color = color };
             _position = position;
             _name = name;
-            _colRad = rad;
         }
 
 
