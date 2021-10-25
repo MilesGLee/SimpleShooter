@@ -15,6 +15,8 @@ namespace SimpleShooter
         private Scene[] _scenes = new Scene[0];
         private Stopwatch _stopwatch = new Stopwatch();
         public static Scene _currentScene;
+        private float _spawnEnemyTimer = 0f;
+        private float _spawnEnemyMaxTimer = 3f;
 
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace SimpleShooter
             _currentScene = new Scene();
 
 
-            Player player = new Player(' ', 10, 1, 150, Color.RAYWHITE, 25, "Player");
+            Player player = new Player(' ', 400, 225, 150, Color.RAYWHITE, 25, "Player");
             Enemy enemy = new Enemy('E', 110, 0, 100, player, Color.GOLD, 25, "Enemy");
 
 
@@ -96,7 +98,12 @@ namespace SimpleShooter
             while (Console.KeyAvailable)
                 Console.ReadKey(true);
 
-
+            if (_spawnEnemyTimer > _spawnEnemyMaxTimer)
+            {
+                _spawnEnemyTimer = 0;
+                SpawnEnemy(200);
+            }
+            _spawnEnemyTimer += deltaTime;
         }
 
         /// <summary>
@@ -170,6 +177,26 @@ namespace SimpleShooter
         public static void CloseApplication()
         {
             _applicationShouldClose = true;
+        }
+
+        private void SpawnEnemy(float radius) 
+        {
+            var rand = new Random();
+            //var angle = rand.Next(361)*Math.PI*2;
+            //double x = Math.Cos(angle) * radius;
+            //double y = Math.Sin(angle) * radius;
+            float t = rand.Next(361);
+            double x = radius * Math.Cos(t);
+            double y = radius * Math.Sin(t);
+
+            for (int i = 0; i < Scene._actors.Length; i++)
+            {
+                if (Scene._actors[i] is Player)
+                {
+                    Enemy enemy = new Enemy('E', (float)x, (float)y, 100, (Player)Scene._actors[i], Color.GOLD, 25, "Enemy");
+                    _currentScene.AddActor(enemy);
+                }
+            }
         }
     }
 }

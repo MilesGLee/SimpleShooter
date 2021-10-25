@@ -61,5 +61,13 @@ namespace SimpleShooter
         {
             Raylib.DrawCircleLines((int)Postion.X, (int)Postion.Y, CollisionRadius, Color.RED);
         }
+
+        public override void OnCollision(Actor actor)
+        {
+            if (actor is Player) 
+            {
+                Engine.CloseApplication();
+            }
+        }
     }
 }

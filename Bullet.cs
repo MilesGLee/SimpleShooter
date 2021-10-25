@@ -62,7 +62,10 @@ namespace SimpleShooter
         public override void OnCollision(Actor actor)
         {
             if (actor is Enemy)
+            {
                 Engine._currentScene.RemoveActor(actor);
+                Engine._currentScene.RemoveActor(this);
+            }
         }
 
         public override void Draw()
