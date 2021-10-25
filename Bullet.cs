@@ -10,7 +10,7 @@ namespace SimpleShooter
     {
         private float _speed;
         private Vector2 _velocity;
-        private Vector2 _direction = new Vector2 { X = 1, Y = 0};
+        private Vector2 _direction = new Vector2 { X = 1, Y = 0}; 
 
         public float Speed
         {
@@ -28,7 +28,6 @@ namespace SimpleShooter
         public Bullet(char icon, float x, float y, float speed, Color color, Vector2 direction, float radi, string name = "Bullet")
             : base(icon, x, y, speed, color, radi, name)
         {
-            //i need to the player = palyer I need to get the this.
             _speed = speed;
             _direction = direction;
         }
@@ -47,7 +46,7 @@ namespace SimpleShooter
             Postion += Velocity;
 
 
-            if (Postion.X > 800)
+            if (Postion.X > 800) //Destroy the bullet if it is off screen.
                 Engine._currentScene.RemoveActor(this);
             if (Postion.X < 0)
                 Engine._currentScene.RemoveActor(this);

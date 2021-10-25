@@ -47,7 +47,7 @@ namespace SimpleShooter
                 {
                     if (j >= _actors.Length)
                         j--;
-                    if (MathLibaray.Vector2.Distance(_actors[i].Postion, _actors[j].Postion) < _actors[i].CollisionRadius)
+                    if (_actors[i].Collider.CheckCollision(_actors[j]))
                     {
                         //then start on Collision for actor 1 by making actor 2 be collied with.
                         _actors[j].OnCollision(_actors[i]);

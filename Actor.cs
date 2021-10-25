@@ -25,6 +25,7 @@ namespace SimpleShooter
         private float _speed;
         private Vector2 _forward = new Vector2(1, 0);
         private float _colRad = 1;
+        private Collider _collider;
 
 
         public float CollisionRadius
@@ -62,6 +63,12 @@ namespace SimpleShooter
         {
             get { return _forward; }
             set { _forward = value; }
+        }
+
+        public Collider Collider 
+        {
+            get { return _collider; }
+            set { _collider = value; }
         }
 
         public void SetIcon(char symbol) 
@@ -125,9 +132,16 @@ namespace SimpleShooter
         /// <summary>
         /// Startes when the player hits a target.
         /// </summary>
-        public virtual void OnCollision(Actor actor)
+        /// 
+        public virtual void OnCollision(Actor actor) 
         {
 
+        }
+        public virtual bool CheckForCollision(Actor actor)
+        {
+            if (Collider == null || actor.Collider == null)
+                return false;
+            return Collider.CheckCollision(actor);
         }
     }
 }

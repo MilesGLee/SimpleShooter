@@ -73,8 +73,11 @@ namespace SimpleShooter
 
 
             Player player = new Player(' ', 400, 225, 150, Color.RAYWHITE, 25, "Player");
+            CircleCollider playerCollider = new CircleCollider(50, player);
+            player.Collider = playerCollider;
             Enemy enemy = new Enemy('E', 110, 0, 100, player, Color.GOLD, 25, "Enemy");
-
+            CircleCollider enemyCollider = new CircleCollider(50, enemy);
+            enemy.Collider = enemyCollider;
 
 
             //adds the actor to the scene and takes in that actor
@@ -98,7 +101,7 @@ namespace SimpleShooter
             while (Console.KeyAvailable)
                 Console.ReadKey(true);
 
-            if (_spawnEnemyTimer > _spawnEnemyMaxTimer)
+            if (_spawnEnemyTimer > _spawnEnemyMaxTimer) //Loop to spawn enemies constantly.
             {
                 _spawnEnemyTimer = 0;
                 SpawnEnemy(200);
@@ -181,19 +184,18 @@ namespace SimpleShooter
 
         private void SpawnEnemy(float radius) 
         {
-            var rand = new Random();
-            //var angle = rand.Next(361)*Math.PI*2;
-            //double x = Math.Cos(angle) * radius;
-            //double y = Math.Sin(angle) * radius;
+            var rand = new Random(); //These lines are to give the new enemy a random spawn point with a given radius.
             float t = rand.Next(361);
             double x = radius * Math.Cos(t);
             double y = radius * Math.Sin(t);
 
             for (int i = 0; i < Scene._actors.Length; i++)
             {
-                if (Scene._actors[i] is Player)
+                if (Scene._actors[i] is Player) //Sifts through all the actors to get the player, to make them the new enemies target.
                 {
                     Enemy enemy = new Enemy('E', (float)x, (float)y, 100, (Player)Scene._actors[i], Color.GOLD, 25, "Enemy");
+                    CircleCollider enemyCollider = new CircleCollider(25, enemy);
+                    enemy.Collider = enemyCollider;
                     _currentScene.AddActor(enemy);
                 }
             }

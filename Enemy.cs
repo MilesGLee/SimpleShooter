@@ -64,7 +64,7 @@ namespace SimpleShooter
 
         public override void OnCollision(Actor actor)
         {
-            if (actor is Player) 
+            if (actor is Player) //If an enemy hits the player, end the game.
             {
                 Engine.CloseApplication();
             }
