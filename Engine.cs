@@ -17,6 +17,7 @@ namespace SimpleShooter
         public static Scene _currentScene;
         private float _spawnEnemyTimer = 0f;
         private float _spawnEnemyMaxTimer = 3f;
+        public static int Score = 0;
 
 
         /// <summary>
@@ -78,11 +79,15 @@ namespace SimpleShooter
             Enemy enemy = new Enemy('E', 110, 0, 100, player, Color.GOLD, "Enemy");
             CircleCollider enemyCollider = new CircleCollider(25, enemy);
             enemy.Collider = enemyCollider;
+            Actor point = new Actor(' ', 200, 200, 0, Color.MAGENTA, "Point");
+            AABBCollider pointCollider = new AABBCollider(15, 15, point);
+            point.Collider = pointCollider;
 
 
             //adds the actor to the scene and takes in that actor
             _currentScene.AddActor(enemy);
             _currentScene.AddActor(player);
+            _currentScene.AddActor(point);
             _currentSceneIndex = AddScene(_currentScene);
 
             _scenes[_currentSceneIndex].Start();
@@ -105,6 +110,7 @@ namespace SimpleShooter
             {
                 _spawnEnemyTimer = 0;
                 SpawnEnemy(200);
+                SpawnPoint(150);
             }
             _spawnEnemyTimer += deltaTime;
         }
@@ -185,9 +191,10 @@ namespace SimpleShooter
         private void SpawnEnemy(float radius) 
         {
             var rand = new Random(); //These lines are to give the new enemy a random spawn point with a given radius.
+            
             float t = rand.Next(361);
-            double x = radius * Math.Cos(t);
-            double y = radius * Math.Sin(t);
+            double x = 400 + radius * Math.Cos(t);
+            double y = 225 + radius * Math.Sin(t);
 
             for (int i = 0; i < Scene._actors.Length; i++)
             {
@@ -197,8 +204,24 @@ namespace SimpleShooter
                     CircleCollider enemyCollider = new CircleCollider(25, enemy);
                     enemy.Collider = enemyCollider;
                     _currentScene.AddActor(enemy);
+
                 }
             }
+        }
+
+        private void SpawnPoint(float radius)
+        {
+            var rand = new Random(); //These lines are to give the new enemy a random spawn point with a given radius.
+
+            var angle = rand.NextDouble() * Math.PI * 2;
+            var rad = Math.Sqrt(rand.NextDouble()) * radius;
+            var x = 400 + rad * Math.Cos(angle);
+            var y = 225 + rad * Math.Sin(angle);
+
+            Actor point = new Actor(' ', (float)x, (float)y, 0, Color.MAGENTA, "Point");
+            AABBCollider pointCollider = new AABBCollider(15, 15, point);
+            point.Collider = pointCollider;
+            _currentScene.AddActor(point);
         }
     }
 }

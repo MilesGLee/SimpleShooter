@@ -43,16 +43,16 @@ namespace SimpleShooter
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 
             base.Update(deltaTime);
-            Postion += Velocity;
+            Position += Velocity;
 
 
-            if (Postion.X > 800) //Destroy the bullet if it is off screen.
+            if (Position.X > 800) //Destroy the bullet if it is off screen.
                 Engine._currentScene.RemoveActor(this);
-            if (Postion.X < 0)
+            if (Position.X < 0)
                 Engine._currentScene.RemoveActor(this);
-            if (Postion.Y > 450)
+            if (Position.Y > 450)
                 Engine._currentScene.RemoveActor(this);
-            if (Postion.Y < 0)
+            if (Position.Y < 0)
                 Engine._currentScene.RemoveActor(this);
 
             
@@ -70,7 +70,7 @@ namespace SimpleShooter
         public override void Draw()
         {
             CircleCollider myCol = (CircleCollider)Collider;
-            Raylib.DrawCircleLines((int)Postion.X, (int)Postion.Y, myCol.CollisionRadius, Color.YELLOW);
+            Raylib.DrawCircleLines((int)Position.X, (int)Position.Y, myCol.CollisionRadius, Color.YELLOW);
         }
     }
 }

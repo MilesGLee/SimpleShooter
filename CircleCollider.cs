@@ -24,7 +24,7 @@ namespace SimpleShooter
         {
             if (other.Owner == Owner) //If the colliding circle is not the owner of this circle.
                 return false;
-            float distance = Vector2.Distance(other.Owner.Postion, Owner.Postion); //Distance between both circles
+            float distance = Vector2.Distance(other.Owner.Position, Owner.Position); //Distance between both circles
             float combinedRadii = other.CollisionRadius + CollisionRadius; //The combined radii of the circles
 
             return distance <= combinedRadii; //if the distance is less than the combined radii, a collision occured.
@@ -37,13 +37,13 @@ namespace SimpleShooter
                 return false;
 
             //Get and clamp the direction from the collider to the aabb
-            Vector2 direction = Owner.Postion - other.Owner.Postion;
+            Vector2 direction = Owner.Position - other.Owner.Position;
             direction.X = Math.Clamp(direction.X, -other.Width / 2, other.Width / 2);
             direction.Y = Math.Clamp(direction.Y, -other.Height / 2, other.Height / 2);
 
             //find the closest point between the AABB and the collider
-            Vector2 closestPoint = other.Owner.Postion + direction;
-            float distanceFromClosestPoint = Vector2.Distance(Owner.Postion, closestPoint);
+            Vector2 closestPoint = other.Owner.Position + direction;
+            float distanceFromClosestPoint = Vector2.Distance(Owner.Position, closestPoint);
 
             //Return true if the colliders are colliding.
             return distanceFromClosestPoint <= CollisionRadius;

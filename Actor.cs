@@ -41,7 +41,7 @@ namespace SimpleShooter
             get { return _speed; }
         }
 
-        public Vector2 Postion
+        public Vector2 Position
         {
             get { return _position; }
             set { _position = value; }
@@ -106,12 +106,20 @@ namespace SimpleShooter
         public virtual void Update(float deltaTime)
         {
 
-            Console.WriteLine(_name + ":" + Postion.X + ":" + Postion.Y);
+            Console.WriteLine(_name + ":" + Position.X + ":" + Position.Y);
         }
 
         public virtual void Draw()
         {
-            Raylib.DrawText(Icon.Symbol.ToString(), (int)Postion.X, (int)Postion.Y, 50, Icon.color);
+            if (_name == "Point")
+            {
+                AABBCollider myCol = (AABBCollider)Collider;
+                Raylib.DrawRectangle((int)Position.X, (int)Position.Y, (int)myCol.Width, (int)myCol.Height, Color.MAGENTA);
+            }
+            else
+            {
+                Raylib.DrawText(Icon.Symbol.ToString(), (int)Position.X, (int)Position.Y, 50, Icon.color);
+            }
             
         }
 
@@ -126,7 +134,11 @@ namespace SimpleShooter
         /// 
         public virtual void OnCollision(Actor actor) 
         {
-
+            if (_name == "Point" && actor is Player) 
+            {
+                Engine._currentScene.RemoveActor(this);
+                Engine.Score++;
+            }
         }
         public virtual bool CheckForCollision(Actor actor)
         {

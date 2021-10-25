@@ -41,26 +41,26 @@ namespace SimpleShooter
             //Create a vector tht stores the move input
             Vector2 moveDirection = new Vector2();
             if(_player != null)
-                moveDirection = _player.Postion - Postion;
+                moveDirection = _player.Position - Position;
 
             //caculates the veclocity 
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 
             base.Update(deltaTime);
             if(GetTargetInSight())
-                Postion += Velocity;
+                Position += Velocity;
         }
 
         public bool GetTargetInSight()
         {
-            Vector2 directionOfTarget = (_player.Postion - Postion).Normalized;
+            Vector2 directionOfTarget = (_player.Position - Position).Normalized;
             return Vector2.DotProduct(directionOfTarget, Forward) > 0;
         }
 
         public override void Draw()
         {
             CircleCollider myCol = (CircleCollider)Collider;
-            Raylib.DrawCircleLines((int)Postion.X, (int)Postion.Y, myCol.CollisionRadius, Color.RED);
+            Raylib.DrawCircleLines((int)Position.X, (int)Position.Y, myCol.CollisionRadius, Color.RED);
         }
 
         public override void OnCollision(Actor actor)

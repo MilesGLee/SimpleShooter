@@ -55,7 +55,7 @@ namespace SimpleShooter
         {
             get 
             {
-                return Owner.Postion.X - (Width / 2);
+                return Owner.Position.X - (Width / 2);
             }
         }
 
@@ -64,7 +64,7 @@ namespace SimpleShooter
         {
             get 
             {
-                return Owner.Postion.X + (Width / 2);
+                return Owner.Position.X + (Width / 2);
             }
         }
 
@@ -73,7 +73,7 @@ namespace SimpleShooter
         {
             get 
             {
-                return Owner.Postion.Y - (Height / 2);
+                return Owner.Position.Y - (Height / 2);
             }
         }
 
@@ -82,7 +82,7 @@ namespace SimpleShooter
         {
             get 
             {
-                return Owner.Postion.Y + (Height / 2);
+                return Owner.Position.Y + (Height / 2);
             }
         }
     }
