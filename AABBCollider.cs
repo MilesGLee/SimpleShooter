@@ -31,6 +31,11 @@ namespace SimpleShooter
             return false;
         }
 
+        public override bool CheckCollisionCircle(CircleCollider other)
+        {
+            return other.CheckCollisionAABB(this);
+        }
+
         //Width of the box collision
         public float Width 
         {

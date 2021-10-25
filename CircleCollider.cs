@@ -29,5 +29,24 @@ namespace SimpleShooter
 
             return distance <= combinedRadii; //if the distance is less than the combined radii, a collision occured.
         }
+
+        public override bool CheckCollisionAABB(AABBCollider other)
+        {
+            //return false if colliding with itself
+            if (other.Owner == Owner)
+                return false;
+
+            //Get and clamp the direction from the collider to the aabb
+            Vector2 direction = Owner.Postion - other.Owner.Postion;
+            direction.X = Math.Clamp(direction.X, -other.Width / 2, other.Width / 2);
+            direction.Y = Math.Clamp(direction.Y, -other.Height / 2, other.Height / 2);
+
+            //find the closest point between the AABB and the collider
+            Vector2 closestPoint = other.Owner.Postion + direction;
+            float distanceFromClosestPoint = Vector2.Distance(Owner.Postion, closestPoint);
+
+            //Return true if the colliders are colliding.
+            return distanceFromClosestPoint <= CollisionRadius;
+        }
     }
 }
