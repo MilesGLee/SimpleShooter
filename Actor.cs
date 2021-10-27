@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MathLibaray;
+using MathLibrary;
 using Raylib_cs;
 
 namespace SimpleShooter
@@ -18,13 +18,12 @@ namespace SimpleShooter
     {
         private Icon _icon;
         private string _name;
-        //can make the vector2 because i used the using mathLIbaray;
-        private Vector2 _position;
-        //made started a bool so we can see if actors is there or not.
+        //private Vector2 _position;
         private bool _started;
         private float _speed;
         private Vector2 _forward = new Vector2(1, 0);
         private Collider _collider;
+        private Matrix3 _transform = Matrix3.Identity;
 
         public bool Started
         {
@@ -43,8 +42,8 @@ namespace SimpleShooter
 
         public Vector2 Position
         {
-            get { return _position; }
-            set { _position = value; }
+            get { return new Vector2(_transform.M02, _transform.M12); }
+            set { _transform.M02 = value.X; _transform.M12 = value.Y; }
         }
         public Icon Icon
         {
@@ -93,7 +92,7 @@ namespace SimpleShooter
         {
             //updatede the Icon with the struct and made it take a symbol and a color
             _icon = new Icon { Symbol = icon, color = color };
-            _position = position;
+            Position = position;
             _name = name;
         }
 
@@ -145,6 +144,12 @@ namespace SimpleShooter
             if (Collider == null || actor.Collider == null)
                 return false;
             return Collider.CheckCollision(actor);
+        }
+
+        public void SetScale(float x, float y) 
+        {
+            _transform.M00 = x;
+            _transform.M11 = y;
         }
     }
 }

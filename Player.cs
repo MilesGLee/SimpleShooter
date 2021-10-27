@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MathLibaray;
+using MathLibrary;
 using Raylib_cs;
 
 namespace SimpleShooter
