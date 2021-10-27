@@ -6,17 +6,8 @@ using Raylib_cs;
 
 namespace SimpleShooter
 {
-    /// <summary>
-    /// is there so i can hold the type for icon for actors or player
-    /// </summary>
-    struct Icon
-    {
-        public char Symbol;
-        public Color color;
-    }
     class Actor
     {
-        private Icon _icon;
         private string _name;
         //private Vector2 _position;
         private bool _started;
@@ -24,6 +15,7 @@ namespace SimpleShooter
         private Vector2 _forward = new Vector2(1, 0);
         private Collider _collider;
         private Matrix3 _transform = Matrix3.Identity;
+        private Sprite _sprite;
 
         public bool Started
         {
@@ -45,10 +37,6 @@ namespace SimpleShooter
             get { return new Vector2(_transform.M02, _transform.M12); }
             set { _transform.M02 = value.X; _transform.M12 = value.Y; }
         }
-        public Icon Icon
-        {
-            get { return _icon; }
-        }
 
         public Vector2 Forward
         {
@@ -56,15 +44,16 @@ namespace SimpleShooter
             set { _forward = value; }
         }
 
+        public Sprite Sprite 
+        {
+            get { return _sprite; }
+            set { _sprite = value; }
+        }
+
         public Collider Collider 
         {
             get { return _collider; }
             set { _collider = value; }
-        }
-
-        public void SetIcon(char symbol) 
-        {
-            _icon.Symbol = symbol;
         }
 
         public Actor()
@@ -76,8 +65,8 @@ namespace SimpleShooter
         /// </summary>
         /// <param name="x">is the replace the Vector2</param>
         /// <param name="y">is the replacement for the veoctor2</param>
-        public Actor(char icon, float x, float y, float speed, Color color, string name = "Actor") :
-            this(icon, new Vector2 { X = x, Y = y }, color, speed, name)
+        public Actor(float x, float y, float speed, string name = "Actor", string path = "") :
+            this(new Vector2 { X = x, Y = y }, speed, name, path)
         { }
 
 
@@ -88,12 +77,13 @@ namespace SimpleShooter
         /// <param name="position">is the loctation that the icon is in</param>
         /// <param name="name">current Actor name</param>
         /// <param name="color">The color that the neame or icon will be</param>
-        public Actor(char icon, Vector2 position, Color color, float speed, string name = "Actor")
+        public Actor(Vector2 position, float speed, string name = "Actor", string path = "")
         {
-            //updatede the Icon with the struct and made it take a symbol and a color
-            _icon = new Icon { Symbol = icon, color = color };
             Position = position;
             _name = name;
+
+            if(path != "")
+                _sprite = new Sprite(path);
         }
 
 
@@ -117,7 +107,10 @@ namespace SimpleShooter
             }
             else
             {
-                Raylib.DrawText(Icon.Symbol.ToString(), (int)Position.X, (int)Position.Y, 50, Icon.color);
+                if (_sprite != null)
+                    _sprite.Draw(_transform);
+                CircleCollider myCol = (CircleCollider)Collider;
+                Raylib.DrawCircleLines((int)Position.X, (int)Position.Y, myCol.CollisionRadius, Color.GREEN);
             }
             
         }

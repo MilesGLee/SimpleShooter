@@ -73,13 +73,15 @@ namespace SimpleShooter
             _currentScene = new Scene();
 
 
-            Player player = new Player(' ', 400, 225, 150, Color.RAYWHITE, "Player");
+            Player player = new Player(400, 225, 150, "Player", "player.png");
+            player.SetScale(50, 50);
             CircleCollider playerCollider = new CircleCollider(25, player);
             player.Collider = playerCollider;
-            Enemy enemy = new Enemy('E', 110, 0, 100, player, Color.GOLD, "Enemy");
+            Enemy enemy = new Enemy(110, 0, 100, player, "Enemy", "enemy.png");
+            enemy.SetScale(50, 50);
             CircleCollider enemyCollider = new CircleCollider(25, enemy);
             enemy.Collider = enemyCollider;
-            Actor point = new Actor(' ', 200, 200, 0, Color.MAGENTA, "Point");
+            Actor point = new Actor(200, 200, 0, "Point");
             AABBCollider pointCollider = new AABBCollider(15, 15, point);
             point.Collider = pointCollider;
 
@@ -109,7 +111,7 @@ namespace SimpleShooter
             if (_spawnEnemyTimer > _spawnEnemyMaxTimer) //Loop to spawn enemies constantly.
             {
                 _spawnEnemyTimer = 0;
-                SpawnEnemy(200);
+                //SpawnEnemy(200);
                 SpawnPoint(150);
             }
             _spawnEnemyTimer += deltaTime;
@@ -200,7 +202,8 @@ namespace SimpleShooter
             {
                 if (Scene._actors[i] is Player) //Sifts through all the actors to get the player, to make them the new enemies target.
                 {
-                    Enemy enemy = new Enemy('E', (float)x, (float)y, 100, (Player)Scene._actors[i], Color.GOLD, "Enemy");
+                    Enemy enemy = new Enemy((float)x, (float)y, 100, (Player)Scene._actors[i], "Enemy");
+                    enemy.SetScale(50, 50);
                     CircleCollider enemyCollider = new CircleCollider(25, enemy);
                     enemy.Collider = enemyCollider;
                     _currentScene.AddActor(enemy);
@@ -218,7 +221,7 @@ namespace SimpleShooter
             var x = 400 + rad * Math.Cos(angle);
             var y = 225 + rad * Math.Sin(angle);
 
-            Actor point = new Actor(' ', (float)x, (float)y, 0, Color.MAGENTA, "Point");
+            Actor point = new Actor((float)x, (float)y, 0, "Point");
             AABBCollider pointCollider = new AABBCollider(15, 15, point);
             point.Collider = pointCollider;
             _currentScene.AddActor(point);

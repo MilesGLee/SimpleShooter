@@ -25,8 +25,8 @@ namespace SimpleShooter
         }
 
 
-        public Bullet(char icon, float x, float y, float speed, Color color, Vector2 direction, string name = "Bullet")
-            : base(icon, x, y, speed, color, name)
+        public Bullet(float x, float y, float speed, Vector2 direction, string name = "Bullet", string path = "")
+            : base(x, y, speed, name, path)
         {
             _speed = speed;
             _direction = direction;
@@ -65,12 +65,6 @@ namespace SimpleShooter
                 Engine._currentScene.RemoveActor(actor);
                 Engine._currentScene.RemoveActor(this);
             }
-        }
-
-        public override void Draw()
-        {
-            CircleCollider myCol = (CircleCollider)Collider;
-            Raylib.DrawCircleLines((int)Position.X, (int)Position.Y, myCol.CollisionRadius, Color.YELLOW);
         }
     }
 }
