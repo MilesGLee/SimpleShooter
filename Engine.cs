@@ -63,7 +63,7 @@ namespace SimpleShooter
         private void Start()
         {
             //created a window using raylib
-            Raylib.InitWindow(800, 450, "The math for game. ");
+            Raylib.InitWindow(800, 450, "The simple shooter. ");
             Raylib.SetTargetFPS(0);
 
             _stopwatch.Start();

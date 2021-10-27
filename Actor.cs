@@ -15,6 +15,9 @@ namespace SimpleShooter
         private Vector2 _forward = new Vector2(1, 0);
         private Collider _collider;
         private Matrix3 _transform = Matrix3.Identity;
+        public Matrix3 _translation = Matrix3.Identity;
+        public Matrix3 _rotation = Matrix3.Identity;
+        public Matrix3 _scale = Matrix3.Identity;
         private Sprite _sprite;
 
         public bool Started
@@ -94,7 +97,7 @@ namespace SimpleShooter
 
         public virtual void Update(float deltaTime)
         {
-
+            _transform = _translation * _rotation * _scale;
             Console.WriteLine(_name + ":" + Position.X + ":" + Position.Y);
         }
 
@@ -139,6 +142,19 @@ namespace SimpleShooter
             return Collider.CheckCollision(actor);
         }
 
+        //sets the actors position
+        public void Translate(float translationX, float translationY) 
+        {
+
+        }
+
+        //Sets the actors rotation
+        public void SetRotation(float radius) 
+        {
+
+        }
+
+        //sets the actors scale
         public void SetScale(float x, float y) 
         {
             _transform.M00 = x;
