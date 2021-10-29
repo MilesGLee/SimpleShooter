@@ -82,7 +82,7 @@ namespace SimpleShooter
         /// <param name="color">The color that the neame or icon will be</param>
         public Actor(Vector2 position, float speed, string name = "Actor", string path = "")
         {
-            Position = position;
+            SetTranslate(position.X, position.Y);
             _name = name;
 
             if(path != "")
@@ -143,22 +143,34 @@ namespace SimpleShooter
         }
 
         //sets the actors position
+        public void SetTranslate(float translationX, float translationY)
+        {
+            _translation = Matrix3.CreateTranslation(translationX, translationY);
+        }
+
         public void Translate(float translationX, float translationY) 
         {
-
+            _translation *= Matrix3.CreateTranslation(translationX, translationY);
         }
 
         //Sets the actors rotation
-        public void SetRotation(float radius) 
+        public void SetRotation(float radians)
         {
-
+            _rotation = Matrix3.CreateRotation(radians);
+        }
+        public void Rotate(float radians)
+        {
+            _rotation *= Matrix3.CreateRotation(radians);
         }
 
         //sets the actors scale
         public void SetScale(float x, float y) 
         {
-            _transform.M00 = x;
-            _transform.M11 = y;
+            _scale = Matrix3.CreateScale(x, y);
+        }
+        public void Scale(float x, float y)
+        {
+            _scale *= Matrix3.CreateScale(x, y);
         }
     }
 }

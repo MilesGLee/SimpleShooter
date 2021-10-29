@@ -42,8 +42,9 @@ namespace SimpleShooter
             //caculates the veclocity 
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 
+            base.Translate(Velocity.X, Velocity.Y);
             base.Update(deltaTime);
-            Position += Velocity;
+            
 
 
             if (Position.X > 800) //Destroy the bullet if it is off screen.

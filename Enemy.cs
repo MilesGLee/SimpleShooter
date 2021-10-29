@@ -45,10 +45,12 @@ namespace SimpleShooter
 
             //caculates the veclocity 
             Velocity = moveDirection.Normalized * Speed * deltaTime;
-
+            if (GetTargetInSight())
+                base.Translate(Velocity.X, Velocity.Y);
+            else
+                base.Translate(Velocity.X / 2, Velocity.Y / 2);
             base.Update(deltaTime);
-            if(GetTargetInSight())
-                Position += Velocity;
+            
         }
 
         public bool GetTargetInSight()

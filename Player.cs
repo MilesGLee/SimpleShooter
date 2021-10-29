@@ -48,79 +48,22 @@ namespace SimpleShooter
             int yDiretion = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_W))
                 + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_S));
 
-            //This if statement repeats multiple times with small differences, this gives the player the ability to shoot in 8 directions.
-            if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_UP) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN)) 
+            int bulletDirectionX = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
+                + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT));
+            int bulletDirectionY = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_UP))
+                + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_DOWN));
+
+            //this gives the player the ability to shoot in 8 directions.
+            if (_canShoot && (bulletDirectionX != 0 || bulletDirectionY != 0)) 
             {
-                Bullet pellet = new Bullet(Position.X, Position.Y, 500, new Vector2 { X = 1, Y = 0}, "Bullet", "bullet.png"); //Spawns the bullet with the proper direction to move in.
+                Bullet pellet = new Bullet(Position.X, Position.Y, 500, new Vector2 { X = bulletDirectionX, Y = bulletDirectionY}, "Bullet", "bullet.png"); //Spawns the bullet with the proper direction to move in.
                 pellet.SetScale(25, 25);
                 CircleCollider bulletCollider = new CircleCollider(10, pellet);
                 pellet.Collider = bulletCollider;
                 Engine._currentScene.AddActor(pellet);
                 _canShoot = false;
             }
-            if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_UP) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN))
-            {
-                Bullet pellet = new Bullet(Position.X, Position.Y, 500, new Vector2 { X = -1, Y = 0 }, "Bullet", "bullet.png");
-                pellet.SetScale(25, 25);
-                CircleCollider bulletCollider = new CircleCollider(10, pellet);
-                pellet.Collider = bulletCollider;
-                Engine._currentScene.AddActor(pellet);
-                _canShoot = false;
-            }
-            if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_UP) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN))
-            {
-                Bullet pellet = new Bullet(Position.X, Position.Y, 500, new Vector2 { X = 0, Y = -1 }, "Bullet", "bullet.png");
-                pellet.SetScale(25, 25);
-                CircleCollider bulletCollider = new CircleCollider(10, pellet);
-                pellet.Collider = bulletCollider;
-                Engine._currentScene.AddActor(pellet);
-                _canShoot = false;
-            }
-            if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_DOWN) && Raylib.IsKeyUp(KeyboardKey.KEY_UP) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT))
-            {
-                Bullet pellet = new Bullet(Position.X, Position.Y, 500, new Vector2 { X = 0, Y = 1 }, "Bullet", "bullet.png");
-                pellet.SetScale(25, 25);
-                CircleCollider bulletCollider = new CircleCollider(10, pellet);
-                pellet.Collider = bulletCollider;
-                Engine._currentScene.AddActor(pellet);
-                _canShoot = false;
-            }
-            if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_UP) && Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN))
-            {
-                Bullet pellet = new Bullet(Position.X, Position.Y, 500, new Vector2 { X = 1, Y = -1 }, "Bullet", "bullet.png");
-                pellet.SetScale(25, 25);
-                CircleCollider bulletCollider = new CircleCollider(10, pellet);
-                pellet.Collider = bulletCollider;
-                Engine._currentScene.AddActor(pellet);
-                _canShoot = false;
-            }
-            if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_UP) && Raylib.IsKeyDown(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_DOWN))
-            {
-                Bullet pellet = new Bullet(Position.X, Position.Y, 500, new Vector2 { X = -1, Y = -1 }, "Bullet", "bullet.png");
-                pellet.SetScale(25, 25);
-                CircleCollider bulletCollider = new CircleCollider(10, pellet);
-                pellet.Collider = bulletCollider;
-                Engine._currentScene.AddActor(pellet);
-                _canShoot = false;
-            }
-            if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_DOWN) && Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_UP))
-            {
-                Bullet pellet = new Bullet(Position.X, Position.Y, 500, new Vector2 { X = 1, Y = 1 }, "Bullet", "bullet.png");
-                pellet.SetScale(25, 25);
-                CircleCollider bulletCollider = new CircleCollider(10, pellet);
-                pellet.Collider = bulletCollider;
-                Engine._currentScene.AddActor(pellet);
-                _canShoot = false;
-            }
-            if (_canShoot && Raylib.IsKeyDown(KeyboardKey.KEY_DOWN) && Raylib.IsKeyDown(KeyboardKey.KEY_LEFT) && Raylib.IsKeyUp(KeyboardKey.KEY_RIGHT) && Raylib.IsKeyUp(KeyboardKey.KEY_UP))
-            {
-                Bullet pellet = new Bullet(Position.X, Position.Y, 500, new Vector2 { X = -1, Y = 1 }, "Bullet", "bullet.png");
-                pellet.SetScale(25, 25);
-                CircleCollider bulletCollider = new CircleCollider(10, pellet);
-                pellet.Collider = bulletCollider;
-                Engine._currentScene.AddActor(pellet);
-                _canShoot = false;
-            }
+            
 
             //Create a vector tht stores the move input
             Vector2 moveDirection = new Vector2(xDiretion, yDiretion);
@@ -128,11 +71,15 @@ namespace SimpleShooter
             //caculates the veclocity 
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 
-            base.Update(deltaTime);
             //moves the player
-            Position += Velocity;
+            base.Translate(Velocity.X, Velocity.Y); 
+            
             if (!_canShoot) //A cooldown for shooting.
                 _shootTime += deltaTime;
+
+            base.Update(deltaTime);
+
+
         }
     }
 }

@@ -111,7 +111,7 @@ namespace SimpleShooter
             if (_spawnEnemyTimer > _spawnEnemyMaxTimer) //Loop to spawn enemies constantly.
             {
                 _spawnEnemyTimer = 0;
-                //SpawnEnemy(200);
+                SpawnEnemy(200);
                 SpawnPoint(150);
             }
             _spawnEnemyTimer += deltaTime;
@@ -202,7 +202,7 @@ namespace SimpleShooter
             {
                 if (Scene._actors[i] is Player) //Sifts through all the actors to get the player, to make them the new enemies target.
                 {
-                    Enemy enemy = new Enemy((float)x, (float)y, 100, (Player)Scene._actors[i], "Enemy");
+                    Enemy enemy = new Enemy((float)x, (float)y, 100, (Player)Scene._actors[i], "Enemy", "enemy.png");
                     enemy.SetScale(50, 50);
                     CircleCollider enemyCollider = new CircleCollider(25, enemy);
                     enemy.Collider = enemyCollider;
