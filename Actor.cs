@@ -165,7 +165,10 @@ namespace SimpleShooter
             }
 
             if (actorRemoved)
+            {
                 _children = temArray;
+                child.Parent = null;
+            }
 
             return actorRemoved;
         }
