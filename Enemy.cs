@@ -49,6 +49,7 @@ namespace SimpleShooter
                 base.Translate(Velocity.X, Velocity.Y);
             else
                 base.Translate(Velocity.X / 2, Velocity.Y / 2);
+            LookAt(_player.Position);
             base.Update(deltaTime);
             
         }

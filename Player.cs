@@ -63,17 +63,22 @@ namespace SimpleShooter
                 Engine._currentScene.AddActor(pellet);
                 _canShoot = false;
             }
-            
 
             //Create a vector tht stores the move input
             Vector2 moveDirection = new Vector2(xDiretion, yDiretion);
+            Vector2 bulletDiretion = new Vector2(bulletDirectionX, bulletDirectionY);
 
             //caculates the veclocity 
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 
+            if (Velocity.Magnitude > 0)
+                Forward = Velocity.Normalized;
+            if (bulletDiretion.Magnitude > 0)
+                Forward = bulletDiretion.Normalized;
+
             //moves the player
-            base.Translate(Velocity.X, Velocity.Y); 
-            
+            base.Translate(Velocity.X, Velocity.Y);
+
             if (!_canShoot) //A cooldown for shooting.
                 _shootTime += deltaTime;
 
