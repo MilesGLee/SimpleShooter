@@ -75,7 +75,7 @@ namespace SimpleShooter
             Actor Sun = new Actor(new Vector2(400, 225), 0, "Sun", "bullet.png");
             Sun.SetScale(100, 100);
             Actor Planet = new Actor(new Vector2(400, 225), 0, "Planet", "bullet.png");
-            Planet.SetScale(50, 50);
+            Planet.SetScale(0.5f, 0.5f);
             Planet.Parent = Sun;
             Planet.Translate(100, 0);
             _currentScene.AddActor(Sun);

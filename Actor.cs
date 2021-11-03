@@ -178,7 +178,10 @@ namespace SimpleShooter
         {
             _started = true;
             if (Parent != null)
+            {
                 Parent.AddChild(this);
+                _scale = ((_scale * Parent._scale));
+            }
         }
 
         public virtual void Update(float deltaTime)
@@ -190,6 +193,7 @@ namespace SimpleShooter
                 Rotate(rot);
             }
             rot = 0;
+            
         }
 
         public virtual void Draw()
