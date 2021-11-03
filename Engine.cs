@@ -72,6 +72,14 @@ namespace SimpleShooter
             //the Start function smaller
             _currentScene = new Scene();
 
+            Actor Sun = new Actor(new Vector2(400, 225), 0, "Sun", "bullet.png");
+            Sun.SetScale(100, 100);
+            Actor Planet = new Actor(new Vector2(400, 225), 0, "Planet", "bullet.png");
+            Planet.SetScale(50, 50);
+            Planet.Parent = Sun;
+            Planet.Translate(100, 0);
+            _currentScene.AddActor(Sun);
+            _currentScene.AddActor(Planet);
 
             Player player = new Player(400, 225, 150, "Player", "player.png");
             player.SetScale(50, 50);
@@ -87,9 +95,9 @@ namespace SimpleShooter
 
 
             //adds the actor to the scene and takes in that actor
-            _currentScene.AddActor(enemy);
-            _currentScene.AddActor(player);
-            _currentScene.AddActor(point);
+            //_currentScene.AddActor(enemy);
+            //_currentScene.AddActor(player);
+            //_currentScene.AddActor(point);
             _currentSceneIndex = AddScene(_currentScene);
 
             _scenes[_currentSceneIndex].Start();
@@ -111,8 +119,8 @@ namespace SimpleShooter
             if (_spawnEnemyTimer > _spawnEnemyMaxTimer) //Loop to spawn enemies constantly.
             {
                 _spawnEnemyTimer = 0;
-                SpawnEnemy(200);
-                SpawnPoint(150);
+                //SpawnEnemy(200);
+                //SpawnPoint(150);
             }
             _spawnEnemyTimer += deltaTime;
         }

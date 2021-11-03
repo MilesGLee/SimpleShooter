@@ -47,11 +47,11 @@ namespace SimpleShooter
                 {
                     if (j >= _actors.Length)
                         j--;
-                    if (_actors[i].Collider.CheckCollision(_actors[j]))
+                    if (_actors[i].Collider != null && _actors[i].Collider.CheckCollision(_actors[j]))
                     {
                         //then start on Collision for actor 1 by making actor 2 be collied with.
                         _actors[j].OnCollision(_actors[i]);
-                        
+
                     }
                 }
             }

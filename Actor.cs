@@ -21,6 +21,7 @@ namespace SimpleShooter
         private Actor[] _children = new Actor[0];
         private Actor _parent;
         private Sprite _sprite;
+        private int rot = 0;
 
         public bool Started
         {
@@ -55,8 +56,8 @@ namespace SimpleShooter
 
         public Vector2 WorldPosition
         {
-            get;       
-            set;
+            get { return new Vector2(); }
+            set { }
         }
 
         public Matrix3 GlobalTransform
@@ -67,8 +68,8 @@ namespace SimpleShooter
 
         public Matrix3 LocalTransform
         {
-            get; 
-            set;
+            get { return _localTransform; }
+            set { _localTransform = value; }
         }
 
         public Actor Parent
@@ -176,12 +177,19 @@ namespace SimpleShooter
         public virtual void Start()
         {
             _started = true;
+            if (Parent != null)
+                Parent.AddChild(this);
         }
 
         public virtual void Update(float deltaTime)
         {
             _localTransform = _translation * _rotation * _scale;
             Console.WriteLine(_name + ":" + Position.X + ":" + Position.Y);
+            for (int i = rot; rot < 360; rot++)
+            {
+                Rotate(rot);
+            }
+            rot = 0;
         }
 
         public virtual void Draw()
@@ -196,7 +204,6 @@ namespace SimpleShooter
                 if (_sprite != null)
                     _sprite.Draw(_localTransform);
                 CircleCollider myCol = (CircleCollider)Collider;
-                //Raylib.DrawCircleLines((int)Position.X, (int)Position.Y, myCol.CollisionRadius, Color.GREEN);
             }
             
         }
